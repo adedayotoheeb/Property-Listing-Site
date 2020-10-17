@@ -1,0 +1,23 @@
+{% extends 'hose/base-2.html' %}
+{% load crispy_forms_tags %}
+
+
+ {% block content %}
+ <br>
+ 
+<div class="row">
+   <div class="col-md-6, col-lg-12">
+        <div class="container">
+            <form  method="POST" enctype="multipart/form-data">
+            {% include "hose/snippet-form.html"  %}
+    
+            {{ f|crispy }}
+            <input name="Submit Property" id="" class="btn btn-block btn-primary" type="Submit" value="Submit Property">
+            </form>
+         </div>
+         
+    </div>
+</div>
+
+{% endblock%}
+

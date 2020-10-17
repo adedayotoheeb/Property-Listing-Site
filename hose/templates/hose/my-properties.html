@@ -1,0 +1,76 @@
+{% extends 'hose/base-2.html' %}
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+{% block title %}
+ADD PORPERTY
+{% endblock %} 
+<!-- Stylesheets -->
+{% block content %}
+
+    <div class="dashboard">
+	    <div class="container-fluid">
+	        <div class="content-area">
+	            <div class="dashboard-content">
+	                <div class="dashboard-header clearfix">
+	                    <div class="row">
+	                        <div class="col-md-6 col-sm-12"><h4>My Properties</h4></div>
+	                        <div class="col-md-6 col-sm-12">
+	                            <div class="breadcrumb-nav">
+	                                <ul>
+	                                    <li><a href="{% url 'hose:home' %}">Index</a></li>
+	                                    <li><a href="{% url 'hose:dashboard' %}">Dashboard</a></li>
+	                                    <li class="active">Properties</li>
+	                                </ul>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="row">
+	                    <div class="column col-lg-12">
+	                    	<div class="properties-box">
+	                    		<div class="title"><h3>My Properties List</h3></div>
+	                    		<div class="inner-container">
+	                                <!-- Property Block -->
+									{% if per %}
+									{% for p in per  %}
+			                        <div class="property-block">
+			                        	<div class="inner-box clearfix">
+	                                        <div class="image-box">
+	                                            <figure class="image"><img src="{{per.prop_pic.url}}" alt=""></figure>
+	                                        </div>
+	                                        <div class="content-box">
+	                                            <h3>{{per.street_name}}</h3>
+	                                            <div class="location"><i class="la la-map-marker"></i> {{per.city}}</div>
+	                                            <ul class="property-info clearfix">
+	                                                <li><i class="flaticon-dimension"></i>{{per.property_size}} Sq-Ft</li>
+	                                                <li><i class="flaticon-bed"></i>{{per.bedroom}}Bedrooms</li>
+	                                                <li><i class="flaticon-car"></i> {{per.garage}} Garage</li>
+	                                                <li><i class="flaticon-bathtub"></i> {{per.bathroom}}Bathroom</li>
+	                                            </ul>
+	                                            <div class="price">$ {{per.price|intcomma}}</div>
+	                                        </div>
+		                                    <div class="option-box">
+		                                        <div class="expire-date">{{per.date_posted}}</div>
+		                                        <ul class="action-list">
+		                                        	<li><a href="#"><i class="la la-edit"></i> Edit</a></li>
+		                                        	<li><a href="#"><i class="la la-eye-slash"></i> Hide</a></li>
+		                                        	<li><a href="#"><i class="la la-trash-o"></i> Delete</a></li>
+		                                        </ul>
+		                                    </div>
+			                        	</div>
+                                    </div>
+									{% endfor %}	
+									{% endif %}		                       
+	                    		</div>
+	                    	</div>
+	                    </div>
+	                </div>
+	            </div>
+	            <p class="copyright-text">© 2018 <a href="#">Expert Themes</a> All right reserved.</p>
+	        </div>
+	    </div>
+	</div>
+
+</div>
+{% endblock%}
