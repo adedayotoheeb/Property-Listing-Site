@@ -18,6 +18,7 @@ from django.views.generic import (
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .decorators import unauthenticated_user
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
 
@@ -136,7 +137,7 @@ class CreateProperty(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("hose:dashboard")
 
     def form_valid(self, form):
-        form.instance.user= self.request.user
+        form.instance.prop_user= self.request.user.userprofile
         return super().form_valid(form)
 
 # class UpdateProperty(UpdateProperty):
@@ -159,7 +160,13 @@ def logiin(request):
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
+            try:
+                user_prof = UserProfile.objects.get(user=user)
+                login(request, user)
+            except UserProfile.DoesNotExist:
+                user_prof = UserProfile(user=user, title="Mr", description="Yea love and Live")
+                user_prof.save()
+                login(request, user)
             return redirect("hose:dashboard")
         else:
             messages.success(request, "Username lr password incorrect")

@@ -40,7 +40,7 @@ class Property(models.Model):
     date_posted = models.DateTimeField(auto_now_add=True)
     property_status = models.CharField(max_length=24, choices=STATUS)
     garage = models.PositiveIntegerField()
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    prop_user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     cat = models.ManyToManyField(Category, verbose_name='Property Category')
     property_size = models.PositiveIntegerField()
 
