@@ -31,7 +31,11 @@ ADD PORPERTY
 	                    	<div class="properties-box">
 	                    		<div class="title"><h3>My Properties List</h3></div>
 	                    		<div class="inner-container">
-	                                <!-- Property Block -->
+									<!-- Property Block -->
+									{%for items in properties %}
+									{{ items.date_posted }}
+									{{ items.prop_pic }}
+									{%endfor%}
 									{% if per %}
 									{% for p in per  %}
 			                        <div class="property-block">

@@ -14,11 +14,12 @@ from django.views.generic import (
     DeleteView,
     DetailView,
     ListView
-    )
+)
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .decorators import unauthenticated_user
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 
@@ -31,6 +32,7 @@ def index(request):
                'blogs': blogs, 'category': category}
 
     return render(request, 'hose/index.html', context)
+
 
 def about(request):
     agent = Agents.objects.all()
@@ -53,9 +55,7 @@ def single_list(request):
     return render(request, 'hose/single-list.html')
 
 
-
-
-def single_blog(request,b_id):
+def single_blog(request, b_id):
     blog_detail = Blog.objects.get(id=b_id)
     context = {'blog': blog_detail}
     return render(request, 'hose/single-blog.html', context)
@@ -67,16 +67,15 @@ def categories(request):
     return render(request, 'hose/categories.html', context)
 
 
-
-
-
 @login_required(login_url='/logiin/')
 def my_properties(request):
     return render(request, 'hose/my-properties.html')
 
+
 @login_required(login_url='/logiin/')
-def messages(request):
+def msg(request):
     return render(request, 'hose/messages.html')
+
 
 @login_required(login_url='/logiin/')
 def invoice(request):
@@ -93,18 +92,16 @@ def favorite(request):
     return render(request, 'hose/favorited-properties.html')
 
 
-
-
-
 @login_required(login_url='/logiin/')
 def my_profile(request):
     userprofile = request.user.userprofile
     form = UserProfileForm(instance=userprofile)
     if request.method == "POST":
-        form = UserProfileForm(request.FILES, request.POST, instance=userprofile)
+        form = UserProfileForm(
+            request.FILES, request.POST, instance=userprofile)
         if form.is_valid():
             form.save()
-    context = {'forms':form}
+    context = {'forms': form}
     return render(request, 'hose/my-profile.html', context)
 
 
@@ -117,27 +114,29 @@ def submit_property(request):
 def invoices(request):
     return render(request, 'hose/my-invoices.html')
 
+
 def add_property(request):
-    if request.method =="POST":
-        propform=PropertyForm(request.POST, request.FILES)
+    if request.method == "POST":
+        propform = PropertyForm(request.POST, request.FILES)
         if propform.is_valid(commit=False):
             instance.user = request.user
             propform.save()
             messages.success(request, "PROPERTY SUCCESSFULLY ADDDED")
     else:
         propform = PropertyForm()
-    return render(request, 'hose/testing.html', {'f':propform})
+    return render(request, 'hose/testing.html', {'f': propform})
 
 
 class CreateProperty(LoginRequiredMixin, CreateView):
-    model= Property
-    template_name= "hose/add-property.html"
-    fields = ['street_name', 'city', 'price', 'bedroom', 'garage','property_status', 'bathroom','cat','property_size','prop_pic' ]
+    model = Property
+    template_name = "hose/add-property.html"
+    fields = ['street_name', 'city', 'price', 'bedroom', 'garage',
+              'property_status', 'bathroom', 'cat', 'property_size', 'prop_pic']
     template_name = 'hose/add-property.html'
     success_url = reverse_lazy("hose:dashboard")
 
     def form_valid(self, form):
-        form.instance.prop_user= self.request.user.userprofile
+        form.instance.prop_user = self.request.user.userprofile
         return super().form_valid(form)
 
 # class UpdateProperty(UpdateProperty):
@@ -147,10 +146,6 @@ class CreateProperty(LoginRequiredMixin, CreateView):
 #     template_name = 'hose/add-property.html'
 
 #
-
-
-
-
 
 
 @unauthenticated_user
@@ -164,15 +159,15 @@ def logiin(request):
                 user_prof = UserProfile.objects.get(user=user)
                 login(request, user)
             except UserProfile.DoesNotExist:
-                user_prof = UserProfile(user=user, title="Mr", description="Yea love and Live")
+                user_prof = UserProfile(
+                    user=user, title="Mr", description="Yea love and Live")
                 user_prof.save()
                 login(request, user)
             return redirect("hose:dashboard")
         else:
-            messages.success(request, "Username lr password incorrect")
+            messages.error(
+                request, "Username or password incorrect")
     return render(request, 'hose/login.html')
-
-    
 
 
 @login_required(login_url='/logiin/')
@@ -186,13 +181,22 @@ def logoutuser(request):
 
 
 class PropertyByUser(LoginRequiredMixin, ListView):
-    login_url='/logiin/'
+    login_url = '/logiin/'
     model = Property
-    template_name ='hose/my-properties.html'
-    context_obeject_name ='per'
+    template_name = 'hose/my-properties.html'
+    context_obeject_name = 'per'
 
     def get_queryset(self):
-        return Property.objects.filter(User=self.request.user)
+        self.userProfile = UserProfile.objects.get(user=self.request.user)
+        return Property.objects.filter(prop_user=self.userProfile)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        self.userProfile = UserProfile.objects.get(user=self.request.user)
+        self.props = Property.objects.filter(prop_user=self.userProfile)
+        context["properties"] = self.props
+        return context
+
 
 @unauthenticated_user
 def register(request):
@@ -200,11 +204,10 @@ def register(request):
     if request.method == "POST":
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            form.save()   
+            form.save()
             return redirect('hose:logiin')
     context = {'form': form}
     return render(request, 'hose/user.html', context)
 
-
-           # user = form.cleaned_data.get('username')
-            # messages.success(request,"Account was created for " + user)
+    # user = form.cleaned_data.get('username')
+    # messages.success(request,"Account was created for " + user)
