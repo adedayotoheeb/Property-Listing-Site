@@ -1,8 +1,8 @@
 # Byte-compiled / optimized / DLL files
-hose/__pycache__/
+__pycache__/
 
 db.sqlite3
 
 upload/
 
-hose/migrations/
+migrations/

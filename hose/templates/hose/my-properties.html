@@ -33,29 +33,24 @@ ADD PORPERTY
 	                    		<div class="inner-container">
 									<!-- Property Block -->
 									{%for items in properties %}
-									{{ items.date_posted }}
-									{{ items.prop_pic }}
-									{%endfor%}
-									{% if per %}
-									{% for p in per  %}
 			                        <div class="property-block">
 			                        	<div class="inner-box clearfix">
 	                                        <div class="image-box">
-	                                            <figure class="image"><img src="{{per.prop_pic.url}}" alt=""></figure>
+	                                            <figure class="image"><img src="{{items.prop_pic.url}}" alt=""></figure>
 	                                        </div>
 	                                        <div class="content-box">
 	                                            <h3>{{per.street_name}}</h3>
-	                                            <div class="location"><i class="la la-map-marker"></i> {{per.city}}</div>
+	                                            <div class="location"><i class="la la-map-marker"></i> {{items.city}}</div>
 	                                            <ul class="property-info clearfix">
-	                                                <li><i class="flaticon-dimension"></i>{{per.property_size}} Sq-Ft</li>
-	                                                <li><i class="flaticon-bed"></i>{{per.bedroom}}Bedrooms</li>
-	                                                <li><i class="flaticon-car"></i> {{per.garage}} Garage</li>
-	                                                <li><i class="flaticon-bathtub"></i> {{per.bathroom}}Bathroom</li>
+	                                                <li><i class="flaticon-dimension"></i>{{items.property_size}} Sq-Ft</li>
+	                                                <li><i class="flaticon-bed"></i>{{items.bedroom}}Bedrooms</li>
+	                                                <li><i class="flaticon-car"></i> {{items.garage}} Garage</li>
+	                                                <li><i class="flaticon-bathtub"></i> {{items.bathroom}}Bathroom</li>
 	                                            </ul>
-	                                            <div class="price">$ {{per.price|intcomma}}</div>
+	                                            <div class="price">$ {{items.price|intcomma}}</div>
 	                                        </div>
 		                                    <div class="option-box">
-		                                        <div class="expire-date">{{per.date_posted}}</div>
+		                                        <div class="expire-date">{{items.date_posted}}</div>
 		                                        <ul class="action-list">
 		                                        	<li><a href="#"><i class="la la-edit"></i> Edit</a></li>
 		                                        	<li><a href="#"><i class="la la-eye-slash"></i> Hide</a></li>
@@ -64,6 +59,9 @@ ADD PORPERTY
 		                                    </div>
 			                        	</div>
                                     </div>
+									{%endfor%}
+									{% if per %}
+									{% for p in per  %}
 									{% endfor %}	
 									{% endif %}		                       
 	                    		</div>
