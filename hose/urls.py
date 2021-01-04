@@ -26,5 +26,6 @@ urlpatterns = [
     path('user-property/', PropertyByUser.as_view(), name='user-property'),
     path('logout/', views.logoutuser, name='logout'),
     path('testing/', views.add_property, name='test'),
+    path ('prop/', views.about, name='property-user'),
    
 ]

@@ -136,7 +136,7 @@ class CreateProperty(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("hose:dashboard")
 
     def form_valid(self, form):
-        form.instance.user= self.request.user
+        form.instance.prop_user= self.request.user
         return super().form_valid(form)
 
 # class UpdateProperty(UpdateProperty):
@@ -178,6 +178,11 @@ def logoutuser(request):
     return redirect('/logiin/')
 
 
+def user_property(request):
+    proper = Property.objects.filter(prop_user = self.request.user.userprofile)
+    context= {'new':proper}
+    return render(request, 'hose/my-properties.html', context)
+
 class PropertyByUser(LoginRequiredMixin, ListView):
     login_url='/logiin/'
     model = Property
@@ -185,7 +190,7 @@ class PropertyByUser(LoginRequiredMixin, ListView):
     context_obeject_name ='per'
 
     def get_queryset(self):
-        return Property.objects.filter(User=self.request.user)
+        return Property.objects.filter(prop_user =self.request.user.userprofile)
 
 @unauthenticated_user
 def register(request):
