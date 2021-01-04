@@ -31,6 +31,7 @@ ADD PORPERTY
 	                    	<div class="properties-box">
 	                    		<div class="title"><h3>My Properties List</h3></div>
 	                    		<div class="inner-container">
+<<<<<<< HEAD
 	                                <!-- Property Block -->
 									{{per}}
 									{% if per %}
@@ -53,6 +54,28 @@ ADD PORPERTY
 	                                        </div>
 		                                    <div class="option-box">
 		                                        <div class="expire-date">{{p.date_posted}}</div>
+=======
+									<!-- Property Block -->
+									{%for items in properties %}
+			                        <div class="property-block">
+			                        	<div class="inner-box clearfix">
+	                                        <div class="image-box">
+	                                            <figure class="image"><img src="{{items.prop_pic.url}}" alt=""></figure>
+	                                        </div>
+	                                        <div class="content-box">
+	                                            <h3>{{per.street_name}}</h3>
+	                                            <div class="location"><i class="la la-map-marker"></i> {{items.city}}</div>
+	                                            <ul class="property-info clearfix">
+	                                                <li><i class="flaticon-dimension"></i>{{items.property_size}} Sq-Ft</li>
+	                                                <li><i class="flaticon-bed"></i>{{items.bedroom}}Bedrooms</li>
+	                                                <li><i class="flaticon-car"></i> {{items.garage}} Garage</li>
+	                                                <li><i class="flaticon-bathtub"></i> {{items.bathroom}}Bathroom</li>
+	                                            </ul>
+	                                            <div class="price">$ {{items.price|intcomma}}</div>
+	                                        </div>
+		                                    <div class="option-box">
+		                                        <div class="expire-date">{{items.date_posted}}</div>
+>>>>>>> 142cbe35ace0ecc476f2e334c9c40013f5bcb3a2
 		                                        <ul class="action-list">
 		                                        	<li><a href="#"><i class="la la-edit"></i> Edit</a></li>
 		                                        	<li><a href="#"><i class="la la-eye-slash"></i> Hide</a></li>
@@ -61,6 +84,9 @@ ADD PORPERTY
 		                                    </div>
 			                        	</div>
                                     </div>
+									{%endfor%}
+									{% if per %}
+									{% for p in per  %}
 									{% endfor %}	
 									{% endif %}		                       
 	                    		</div>
