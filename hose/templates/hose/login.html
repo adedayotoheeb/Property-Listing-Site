@@ -25,6 +25,13 @@
                         <h2 class="form-title">Sign up</h2>
                         <form method="POST" class="register-form" id="register-form">
                             <div class="form-group">
+                                {% if messages %}
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                                        {% endfor %}
+                                </ul>
+                                {% endif %}
                             {% csrf_token %}
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 {{form.username}}

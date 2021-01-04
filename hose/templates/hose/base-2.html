@@ -73,7 +73,7 @@
 	            <li class="active"><a href="{% url 'hose:dashboard' %}"><i class="pe-7s-culture"></i> Dashboard</a></li>
 	            {% comment %} <li><a href="{% url 'hose:my-properties' %}"><i class="pe-7s-diamond"></i>My Properties</a></li> {% endcomment %}
 	            <li><a href="{% url 'hose:create' %}"><i class="pe-7s-like2"></i>Add Property</a></li>
-	            <li><a href="{% url 'hose:user-property' %}"><i class="pe-7s-mail"></i> My Property <span class="tag">6</span></a></li>
+	            <li><a href="{% url 'hose:user-property' %}"><i class="pe-7s-mail"></i> My Property <span class="tag">{{properties.count}}</span></a></li>
 	            <li><a href="{% url 'hose:bookings' %}"><i class="pe-7s-date"></i>Bookings</a></li>
 	            <li><a href="{% url 'hose:invoice' %}"><i class="pe-7s-note2"></i>My Invoices</a></li>
 	            <li><a href="{% url 'hose:submit-property' %}"><i class="pe-7s-up-arrow"></i>Submit Property</a></li>
