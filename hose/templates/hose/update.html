@@ -1,0 +1,22 @@
+{% extends 'hose/base-2.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+<!Doctype html>
+{% block title %}
+UPDATE PROPERTY
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class= "row ">
+         <div class="col-12">
+            <form class="form-group" method="POST" enctype="multipart/form-data">
+                {% include 'hose/snippet-form.html'  %}
+                {{form|crispy}}
+                <br>
+                <br>
+              <input name="Update Property" id="" class="btn  btn-block btn-primary" type="Submit" value="Update Property">
+         </div>
+        
+    </div>
+</div>
+{% endblock  %}

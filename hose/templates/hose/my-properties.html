@@ -52,9 +52,13 @@ ADD PORPERTY
 		                                    <div class="option-box">
 		                                        <div class="expire-date">{{items.date_posted}}</div>
 		                                        <ul class="action-list">
-		                                        	<li><a href="#"><i class="la la-edit"></i> Edit</a></li>
-		                                        	<li><a href="#"><i class="la la-eye-slash"></i> Hide</a></li>
-		                                        	<li><a href="#"><i class="la la-trash-o"></i> Delete</a></li>
+		                                        	<li><button type="button" class="btn btn-warning"><a href="{% url 'hose:edit_post' items.id %}"><i class="la la-edit"></i> Edit</a></button></li>
+		                                        	<!-- <li><a href="#"><i class="la la-eye-slash"></i> Hide</a></li> --><br>
+		                                        	<li><button type="button" class="btn btn-danger" ><a href="{% url 'hose:delete_post' items.id %}"><i class="la la-trash-o"></i> Delete</a></button></li>
+													<!-- Button trigger modal -->
+
+
+								
 		                                        </ul>
 		                                    </div>
 			                        	</div>

@@ -1,10 +1,11 @@
+from django.core import paginator
 from django.shortcuts import render, redirect
 from . models import *
 from .forms import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, PasswordResetForm, SetPasswordForm
 from .forms import *
 from django.views.generic import (
     View,
@@ -13,11 +14,14 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
     DetailView,
-    ListView
+    ListView,
+    FormView 
     )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from .decorators import unauthenticated_user
+from django.contrib.auth import views as auth_views
+from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
 # Create your views here.
 
 
@@ -62,11 +66,12 @@ def single_blog(request,b_id):
 
 def categories(request):
     propert = Property.objects.all()
-    context = {'property': propert}
+    paginator = Paginator(propert,6)
+    page = request.Get.get('page')
+    page_propert = paginator.get_page(page)
+
+    context = {'property': page_propert}
     return render(request, 'hose/categories.html', context)
-
-
-
 
 
 @login_required(login_url='/logiin/')
@@ -116,6 +121,7 @@ def submit_property(request):
 def invoices(request):
     return render(request, 'hose/my-invoices.html')
 
+
 def add_property(request):
     if request.method =="POST":
         propform=PropertyForm(request.POST, request.FILES)
@@ -130,28 +136,31 @@ def add_property(request):
 
 class CreateProperty(LoginRequiredMixin, CreateView):
     model= Property
-    template_name= "hose/add-property.html"
     fields = ['street_name', 'city', 'price', 'bedroom', 'garage','property_status', 'bathroom','cat','property_size','prop_pic' ]
     template_name = 'hose/add-property.html'
     success_url = reverse_lazy("hose:dashboard")
 
     def form_valid(self, form):
-        form.instance.prop_user= self.request.user
+        self.create_user = UserProfile.objects.get(user= self.request.user)
+        form.instance.user = self.create_user
         return super().form_valid(form)
+  
 
-# class UpdateProperty(UpdateProperty):
-#     model= Property
-#     template_name= "hose/add-property.html"
-#     fields = ['prop_pic', 'street_name', 'city', 'price', 'bedroom', 'garage','property_status', 'bathroom','cat','property_size' ]
-#     template_name = 'hose/add-property.html'
+class UpdateProperty(LoginRequiredMixin, UpdateView):
+    model= Property
+    fields = ['street_name', 'city', 'price', 'bedroom', 'garage','property_status', 'bathroom','cat','property_size','prop_pic' ]
+    template_name = 'hose/update.html'
+    success_url = reverse_lazy('hose:user-property')
 
-#
+    
 
+class DeleteProperty(LoginRequiredMixin, DeleteView):
+    model= Property
+    fields = ['street_name', 'city', 'price', 'bedroom', 'garage','property_status', 'bathroom','cat','property_size','prop_pic' ]
+    template_name = 'hose/delete.html'
+    success_url = reverse_lazy('hose:user-property')
 
-
-
-
-
+  
 @unauthenticated_user
 def logiin(request):
     if request.method == 'POST':
@@ -159,17 +168,22 @@ def logiin(request):
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)
+            try:
+                user_prof = UserProfile.objects.get(user=user)
+                login(request, user)
+            except UserProfile.DoesNotExist:
+                user_prof = UserProfile(user=user, title="Mr", description="Yea love and Live")
+                user_prof.save()
+                login(request, user)
             return redirect("hose:dashboard")
-        else: 
+        else:
             messages.success(request, "Username lr password incorrect")
     return render(request, 'hose/login.html')
-
-    
 
 
 @login_required(login_url='/logiin/')
 def dashboard(request):
+    # rentage= Property.objects.filter(request.user)
     return render(request, 'hose/dashboard.html')
 
 
@@ -178,26 +192,23 @@ def logoutuser(request):
     return redirect('/logiin/')
 
 
-def user_property(request):
-    proper = Property.objects.filter(prop_user = self.request.user.userprofile)
-    context= {'new':proper}
-    return render(request, 'hose/my-properties.html', context)
-
 class PropertyByUser(LoginRequiredMixin, ListView):
     login_url='/logiin/'
     model = Property
     template_name ='hose/my-properties.html'
     context_obeject_name ='per'
 
+
     def get_queryset(self):
-        self.userprofile = Userprofile.objects.get(user= self.request.user)
-        return Property.objects.filter(prop_user =self.request.userprofile)
+        self.userProfile = UserProfile.objects.get(user= self.request.user)
+        return Property.objects.filter(prop_user =self.userProfile)
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        self.userprofile = Userprofile.objects.get(user= self.request.user)
-        self.props =Property.objects.filter(prop_user =self.request.userprofile)
-        context["properties"] =self.prop 
+        self.userprofile = UserProfile.objects.get(user= self.request.user)
+        self.props =Property.objects.filter(prop_user =self.userProfile)
+        context["properties"] =self.props
         return context
     
 

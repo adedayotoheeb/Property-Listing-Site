@@ -8,8 +8,8 @@ from .options import tit
 class UserProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     profile_pictiure = models.ImageField(null=True,blank=True)
-    title = models.CharField(choices=tit,null=True, max_length=10)
-    description= models.TextField(null=True)
+    title = models.CharField(choices=tit,null=True, max_length=10, blank=True)
+    description= models.TextField(null=True,blank=True)
 
     def __str__(self):
         return self.user.username
@@ -46,6 +46,11 @@ class Property(models.Model):
 
     def __str__(self):
         return self.street_name
+
+
+    
+    class Meta:
+        ordering = ['-date_posted']
     
     
 
@@ -83,5 +88,3 @@ class Blog(models.Model):
         return self.blog_title
 
 
-class Dapo(models.Model):
-    pass

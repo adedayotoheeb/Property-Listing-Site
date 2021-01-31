@@ -43,18 +43,18 @@
             <div class="upper-right">
                 <ul class="clearfix">
                     <li class="dropdown option-box">
-                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> <img src="{% static 'hose/admin/images/resource/thumb-1.jpg' %}" alt="avatar" class="thumb">My Account</a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{% url 'hose:dashboard' %}">Dashboard</a>
                             <a class="dropdown-item" href="{% url 'hose:create' %}">ADD PROPERTY</a>
-                            <a class="dropdown-item" href="{% url 'hose:messages' %}">Messages</a>
+                            {% comment %} <a class="dropdown-item" href="{% url 'hose:messages' %}">Messages</a>
                             <a class="dropdown-item" href="{% url 'hose:bookings' %}">Bookings</a>
-                            <a class="dropdown-item" href="{% url 'hose:my-profile' %}">My profile</a>
+                            <a class="dropdown-item" href="{% url 'hose:my-profile' %}">My profile</a> {% endcomment %}
                             <a class="dropdown-item" href="{% url 'hose:home' %}">Log out</a>
                         </div>
                     </li>
                     <li class="submit-property">
-                    	<a href="{% url 'hose:submit-property' %}" class="theme-btn btn-style-one">Submit Property <i class="pe-7s-up-arrow"></i></a>
+                    	{% comment %} <a href="{% url 'hose:submit-property' %}" class="theme-btn btn-style-one">Submit Property <i class="pe-7s-up-arrow"></i></a> {% endcomment %}
                     </li>
                     <li class="nav-toggler">
                     	<button class="toggler-btn nav-btn"><span class="bar bar-one"></span><span class="bar bar-two"></span><span class="bar bar-three"></span></button>
@@ -74,10 +74,10 @@
 	            {% comment %} <li><a href="{% url 'hose:my-properties' %}"><i class="pe-7s-diamond"></i>My Properties</a></li> {% endcomment %}
 	            <li><a href="{% url 'hose:create' %}"><i class="pe-7s-like2"></i>Add Property</a></li>
 	            <li><a href="{% url 'hose:user-property' %}"><i class="pe-7s-mail"></i> My Property <span class="tag">{{properties.count}}</span></a></li>
-	            <li><a href="{% url 'hose:bookings' %}"><i class="pe-7s-date"></i>Bookings</a></li>
+	            {% comment %} <li><a href="{% url 'hose:bookings' %}"><i class="pe-7s-date"></i>Bookings</a></li>
 	            <li><a href="{% url 'hose:invoice' %}"><i class="pe-7s-note2"></i>My Invoices</a></li>
 	            <li><a href="{% url 'hose:submit-property' %}"><i class="pe-7s-up-arrow"></i>Submit Property</a></li>
-	            <li><a href="{% url 'hose:my-profile' %}"><i class="pe-7s-user"></i>My Profile</a></li>
+	            <li><a href="{% url 'hose:my-profile' %}"><i class="pe-7s-user"></i>My Profile</a></li> {% endcomment %}
 	            <li><a href="{% url 'hose:logout' %}"><i class="pe-7s-back-2"></i>Logout</a></li>
 	        </ul>
 	    </div>
