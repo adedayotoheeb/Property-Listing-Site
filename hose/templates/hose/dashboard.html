@@ -1,0 +1,290 @@
+{% extends 'hose/base-2.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from expert-themes.com/html/willies/admin/{% url 'hose:dashboard' %} by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 11 Dec 2018 11:39:08 GMT -->
+<head>
+<meta charset="utf-8">
+{% block title %}
+Dashboard
+{% endblock title %} 
+{% block content %}
+    <div class="dashboard">
+	    <div class="container-fluid">
+	        <div class="content-area">
+	            <div class="dashboard-content">
+	                <div class="dashboard-header clearfix">
+	                    <div class="row">
+	                        <div class="col-md-6 col-sm-12"><h4>Hi ,{{request.user|capfirst}}</h4></div>
+	                        <div class="col-md-6 col-sm-12">
+	                            <div class="breadcrumb-nav">
+	                                <ul>
+	                                    <li><a href="{% url 'hose:home' %}">Index</a></li>
+	                                    <li class="active">Dashboard</li>
+	                                </ul>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	        
+
+	                <div class="row">
+	                    <div class="col-lg-3 col-md-6 col-sm-6">
+	                        <div class="ui-item bg-success">
+	                            <div class="left">
+	                                <p>PROPERTYS ON SALE</p>
+	                                <h4></h4>
+	                            </div>
+	                            <div class="right">
+	                                <i class="la la-map-marker"></i>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-lg-3 col-md-6 col-sm-6">
+	                        <div class="ui-item bg-warning">
+	                            <div class="left">
+	                                <p>PROPERTY ON RENTAGE</p>
+	                                <h4></h4>
+	                            </div>
+	                            <div class="right">
+	                                <i class="la la-eye"></i>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    <div class="col-lg-3 col-md-6 col-sm-6">
+	                        <div class="ui-item bg-active">
+	                            <div class="left">
+	                                <p>TOTAL PROPERTY</p>
+	                                <h4></h4>
+	                            </div>
+	                            <div class="right">
+	                                <i class="la la-comments-o"></i>
+	                            </div>
+	                        </div>
+	                    </div> 
+	                    {% comment %} <div class="col-lg-3 col-md-6 col-sm-6">
+	                        <div class="ui-item bg-dark">
+	                            <div class="left">
+	                                <h4>42</h4>
+	                                <p>Bookmarked</p>
+	                            </div>
+	                            <div class="right">
+	                                <i class="la la-heart-o"></i>
+	                            </div>
+	                        </div>
+	                    </div> {% endcomment %}
+	                </div>
+
+	                <div class="row">
+	                    {% comment %} <div class="column col-lg-6 col-md-12">
+	                    	<div class="comments-tab">
+	                    		<h3>Comments</h3>
+                                <div class="tabs-box">
+                                	<ul class="tab-buttons">
+					                    <li data-tab="#pending" class="tab-btn active-btn">Pending</li>
+					                    <li data-tab="#approved" class="tab-btn">Approved</li>
+					                </ul>
+
+                                    <div class="tabs-content" >
+                                    	<!-- Tab Active tab-->
+                						<div class="tab active-tab" id="pending">
+                                            <div class="comments-area">
+				                                <!--comment-->
+				                                <article class="message-box">
+				                                    <div class="thumb-box">
+				                                        <figure class="thumb"><img src="{% static 'hose/admin/images/resource/review-thumb-1.jpg' %}" alt=""></figure>
+				                                        <a href="#" class="reply-btn">Reply Now</a>
+				                                    </div>
+				                                    <div class="content-box">
+				                                        <div class="name">Monija Moro</div>
+				                                        <span class="date"><i class="la la-calendar"></i> 8:42 PM 1/28/2017</span>
+				                                        <div class="text">Accusantium aut, consequatur, culpa dolorum est facilis illo magnam numquam officia omnis qui recusandae sit, tempora ullam unde velit!</div>
+				                                    </div>
+				                                </article>
+
+				                                <!--comment-->
+				                                <article class="message-box">
+				                                    <div class="thumb-box">
+				                                        <figure class="thumb"><img src="{% static 'hose/admin/images/resource/review-thumb-2.jpg' %}" alt=""></figure>
+				                                        <a href="#" class="reply-btn">Reply Now</a>
+				                                    </div>
+				                                    <div class="content-box">
+				                                        <div class="name">Mibano Rests</div>
+				                                        <span class="date"><i class="la la-calendar"></i> 8:42 PM 1/28/2017</span>
+				                                        <div class="text">Accusantium aut, consequatur, culpa dolorum est facilis illo magnam numquam officia omnis qui recusandae sit, tempora ullam unde velit!</div>
+				                                    </div>
+				                                </article>
+
+				                                <!--comment-->
+				                                <article class="message-box">
+				                                    <div class="thumb-box">
+				                                        <figure class="thumb"><img src="{% static 'hose/admin/images/resource/review-thumb-3.jpg' %}" alt=""></figure>
+				                                        <a href="#" class="reply-btn">Reply Now</a>
+				                                    </div>
+				                                    <div class="content-box">
+				                                        <div class="name">Cojari Barna</div>
+				                                        <span class="date"><i class="la la-calendar"></i> 8:42 PM 1/28/2017</span>
+				                                        <div class="text">Accusantium aut, consequatur, culpa dolorum est facilis illo magnam numquam officia omnis qui recusandae sit, tempora ullam unde velit!</div>
+				                                    </div>
+				                                </article>
+					                        </div>
+                                        </div>
+
+                                    	<!-- Tab -->
+                                        <div class="tab" id="approved">
+                                            <div class="comments-area">
+				                                <!--comment-->
+				                                <article class="message-box">
+				                                    <div class="thumb-box">
+				                                        <figure class="thumb"><img src="{% static 'hose/admin/images/resource/review-thumb-1.jpg' %}" alt=""></figure>
+				                                        <a href="#" class="reply-btn">Reply Now</a>
+				                                    </div>
+				                                    <div class="content-box">
+				                                        <div class="name">Monija Moro</div>
+				                                        <span class="date"><i class="la la-calendar"></i> 8:42 PM 1/28/2017</span>
+				                                        <div class="text">Accusantium aut, consequatur, culpa dolorum est facilis illo magnam numquam officia omnis qui recusandae sit, tempora ullam unde velit!</div>
+				                                    </div>
+				                                </article>
+
+				                                <!--comment-->
+				                                <article class="message-box">
+				                                    <div class="thumb-box">
+				                                        <figure class="thumb"><img src="{% static 'hose/admin/images/resource/review-thumb-2.jpg' %}" alt=""></figure>
+				                                        <a href="#" class="reply-btn">Reply Now</a>
+				                                    </div>
+				                                    <div class="content-box">
+				                                        <div class="name">Mibano Rests</div>
+				                                        <span class="date"><i class="la la-calendar"></i> 8:42 PM 1/28/2017</span>
+				                                        <div class="text">Accusantium aut, consequatur, culpa dolorum est facilis illo magnam numquam officia omnis qui recusandae sit, tempora ullam unde velit!</div>
+				                                    </div>
+				                                </article>
+
+				                                <!--comment-->
+				                                <article class="message-box">
+				                                    <div class="thumb-box">
+				                                        <figure class="thumb"><img src="{% static 'hose/admin/images/resource/review-thumb-3.jpg' %}" alt=""></figure>
+				                                        <a href="#" class="reply-btn">Reply Now</a>
+				                                    </div>
+				                                    <div class="content-box">
+				                                        <div class="name">Cojari Barna</div>
+				                                        <span class="date"><i class="la la-calendar"></i> 8:42 PM 1/28/2017</span>
+				                                        <div class="text">Accusantium aut, consequatur, culpa dolorum est facilis illo magnam numquam officia omnis qui recusandae sit, tempora ullam unde velit!</div>
+				                                    </div>
+				                                </article>
+					                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+	                    	</div>
+	                    </div> {% endcomment %}
+	                    {% comment %} <div class="column col-lg-6 col-md-12">
+	                    	<div class="comments-tab">
+	                    		<h3>Comments</h3>
+                                <div class="tabs-box">
+                                	<ul class="tab-buttons">
+					                    <li data-tab="#pending-2" class="tab-btn active-btn">Pending</li>
+					                    <li data-tab="#approved-2" class="tab-btn">Approved</li>
+					                </ul>
+
+                                    <div class="tabs-content" >
+                                    	<!-- Tab Active tab-->
+                						<div class="tab active-tab" id="pending-2">
+                                            <div class="comments-area">
+				                                <!--comment-->
+				                                <article class="message-box">
+				                                    <div class="thumb-box">
+				                                        <figure class="thumb"><img src="{% static 'hose/admin/images/resource/review-thumb-1.jpg' %}" alt=""></figure>
+				                                        <a href="#" class="reply-btn">Reply Now</a>
+				                                    </div>
+				                                    <div class="content-box">
+				                                        <div class="name">Monija Moro</div>
+				                                        <span class="date"><i class="la la-calendar"></i> 8:42 PM 1/28/2017</span>
+				                                        <div class="text">Accusantium aut, consequatur, culpa dolorum est facilis illo magnam numquam officia omnis qui recusandae sit, tempora ullam unde velit!</div>
+				                                    </div>
+				                                </article>
+
+				                                <!--comment-->
+				                                <article class="message-box">
+				                                    <div class="thumb-box">
+				                                        <figure class="thumb"><img src="{% static 'hose/admin/images/resource/review-thumb-2.jpg' %}" alt=""></figure>
+				                                        <a href="#" class="reply-btn">Reply Now</a>
+				                                    </div>
+				                                    <div class="content-box">
+				                                        <div class="name">Mibano Rests</div>
+				                                        <span class="date"><i class="la la-calendar"></i> 8:42 PM 1/28/2017</span>
+				                                        <div class="text">Accusantium aut, consequatur, culpa dolorum est facilis illo magnam numquam officia omnis qui recusandae sit, tempora ullam unde velit!</div>
+				                                    </div>
+				                                </article>
+
+				                                <!--comment-->
+				                                <article class="message-box">
+				                                    <div class="thumb-box">
+				                                        <figure class="thumb"><img src="{% static 'hose/admin/images/resource/review-thumb-3.jpg' %}" alt=""></figure>
+				                                        <a href="#" class="reply-btn">Reply Now</a>
+				                                    </div>
+				                                    <div class="content-box">
+				                                        <div class="name">Cojari Barna</div>
+				                                        <span class="date"><i class="la la-calendar"></i> 8:42 PM 1/28/2017</span>
+				                                        <div class="text">Accusantium aut, consequatur, culpa dolorum est facilis illo magnam numquam officia omnis qui recusandae sit, tempora ullam unde velit!</div>
+				                                    </div>
+				                                </article>
+					                        </div>
+                                        </div>
+
+                                    	<!-- Tab -->
+                                        <div class="tab" id="approved-2">
+                                            <div class="comments-area">
+				                                <!--comment-->
+				                                <article class="message-box">
+				                                    <div class="thumb-box">
+				                                        <figure class="thumb"><img src="{% static 'hose/admin/images/resource/review-thumb-1.jpg' %}" alt=""></figure>
+				                                        <a href="#" class="reply-btn">Reply Now</a>
+				                                    </div>
+				                                    <div class="content-box">
+				                                        <div class="name">Monija Moro</div>
+				                                        <span class="date"><i class="la la-calendar"></i> 8:42 PM 1/28/2017</span>
+				                                        <div class="text">Accusantium aut, consequatur, culpa dolorum est facilis illo magnam numquam officia omnis qui recusandae sit, tempora ullam unde velit!</div>
+				                                    </div>
+				                                </article>
+
+				                                <!--comment-->
+				                                <article class="message-box">
+				                                    <div class="thumb-box">
+				                                        <figure class="thumb"><img src="{% static 'hose/admin/images/resource/review-thumb-2.jpg' %}" alt=""></figure>
+				                                        <a href="#" class="reply-btn">Reply Now</a>
+				                                    </div>
+				                                    <div class="content-box">
+				                                        <div class="name">Mibano Rests</div>
+				                                        <span class="date"><i class="la la-calendar"></i> 8:42 PM 1/28/2017</span>
+				                                        <div class="text">Accusantium aut, consequatur, culpa dolorum est facilis illo magnam numquam officia omnis qui recusandae sit, tempora ullam unde velit!</div>
+				                                    </div>
+				                                </article>
+
+				                                <!--comment-->
+				                                <article class="message-box">
+				                                    <div class="thumb-box">
+				                                        <figure class="thumb"><img src="{% static 'hose/admin/images/resource/review-thumb-3.jpg' %}" alt=""></figure>
+				                                        <a href="#" class="reply-btn">Reply Now</a>
+				                                    </div>
+				                                    <div class="content-box">
+				                                        <div class="name">Cojari Barna</div>
+				                                        <span class="date"><i class="la la-calendar"></i> 8:42 PM 1/28/2017</span>
+				                                        <div class="text">Accusantium aut, consequatur, culpa dolorum est facilis illo magnam numquam officia omnis qui recusandae sit, tempora ullam unde velit!</div>
+				                                    </div>
+				                                </article>
+					                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+	                    	</div>
+	                    </div> {% endcomment %}
+	                </div>
+	            </div>
+	            <p class="copyright-text">© 2018 <a href="#">Expert Themes</a> All right reserved.</p>
+	        </div>
+	    </div>
+	</div>
+
+</div>
+    {% endblock  %}

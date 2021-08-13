@@ -1,0 +1,56 @@
+{% extends 'hose/base.html' %}
+{% load static %}
+{% load humanize %}
+
+<!DOCTYPE html>
+{% block title %}
+BLOG
+{% endblock%}
+{% block content %}
+
+	<!-- Page top section -->
+	<section class="page-top-section set-bg" data-setbg="{% static 'hose/img/page-top-bg.jpg' %}">
+		<div class="container text-white">
+			<h2>Blog grid</h2>
+		</div>
+	</section>
+	<!--  Page top end -->
+
+	<!-- Breadcrumb -->
+	<div class="site-breadcrumb">
+		<div class="container">
+			<a href=""><i class="fa fa-home"></i>Home</a>
+			<span><i class="fa fa-angle-right"></i>Blog Grid</span>
+		</div>
+	</div>
+
+	<!-- page -->
+	{% if blog %}
+	{% for b  in blog %}
+	<section class="page-section blog-page">
+		<div class="container">
+			<div class="row">
+				<!-- blog post -->
+				<div class="col-lg-4 col-md-6 blog-item">
+					<img src="{{b.blog_pic.url}}" alt="">
+					<h5><a href="{% url 'hose:single-blog' b.id %}">{{b.blog_title}}</a></h5>
+					<div class="blog-meta">
+						<span><i class="fa fa-user"></i>{{b.user}}</span>
+						<span><i class="fa fa-clock-o"></i>{{b.date_posted}}</span>
+					</div>
+					<p></p>
+				</div>
+				{% endfor %}
+	{% endif %}
+				<!-- blog post -->		
+			</div>
+			<div class="site-pagination">
+				<span>1</span>
+				<a href="#">2</a>
+				<a href="#">3</a>
+				<a href="#"><i class="fa fa-angle-right"></i></a>
+			</div>
+		</div>
+	</section>
+	<!-- page end -->
+{% endblock content %}

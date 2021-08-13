@@ -1,0 +1,23 @@
+{% extends 'hose/base-2.html' %}
+{% load static %}
+<!Doctype html>
+{% block title %}
+Confirm Delete
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+    	<form method="post">
+        	<h3>Do you really want to delete this Proprerty?</h3>
+        	{% csrf_token %}<br>
+        	<input type="submit" value="Delete" class="btn btn-danger">
+        	<a href="{% url 'hose:create'  %}" class="btn btn-success">Cancel</a>
+    		
+    	</form>
+       
+    </div>
+</div>
+
+{% endblock %}

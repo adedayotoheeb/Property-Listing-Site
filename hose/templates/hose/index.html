@@ -1,0 +1,290 @@
+{% extends 'hose/base.html' %}
+{% load static %}
+{% load humanize %}
+
+<!DOCTYPE html>
+{% block title %}
+ADEDAYO'S PROPERTY LISTING PROJECT
+{% endblock title %}
+{% block content %}
+
+	<!-- Hero section -->
+	<section class="hero-section set-bg" data-setbg="{% static 'hose/img/bg.jpg' %}">
+		<div class="container hero-text text-white">
+			<h2>find your place with our local life style</h2>
+			<p>Search real estate property records, houses, condos, land and more on leramiz.com®.<br>Find property info from the most comprehensive source data.</p>
+			<a href="#" class="site-btn">VIEW DETAIL</a>
+		</div>
+	</section>
+	<!-- Hero section end -->
+
+
+	<!-- Filter form section -->
+	<div class="filter-search">
+		<div class="container">
+			<form class="filter-form">
+				<input type="text" placeholder="Enter a street name, address number or keyword">
+				<select>
+					<option value="City">City</option>
+				</select>
+				<select>
+					<option value="City">State</option>
+				</select>
+				<button class="site-btn fs-submit">SEARCH</button>
+			</form>
+		</div>
+	</div>
+	<!-- Filter form section end -->
+
+
+
+	<!-- Properties section -->
+	<section class="properties-section spad">
+		<div class="container">
+			<div class="section-title text-center">
+				<h3>RECENT PROPERTIES</h3>
+				<p>Discover how much the latest properties have been sold for</p>
+			</div>
+			<div class="row">
+				{% if  properties %}
+				{% for p in properties %}
+				<div class="col-md-6">
+					<div class="propertie-item set-bg" data-setbg="{{p.prop_pic.url}}">
+						<div class="sale-notic">FOR {{p.property_status}}</div>
+						<div class="propertie-info text-white">
+							<div class="info-warp">
+								<h5>{{p.street_name}}</h5>
+								<p><i class="fa fa-map-marker"></i> {{p.city}}</p>
+							</div>
+							<div class="price">${{p.price|intcomma}}</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+	</section>
+	<!-- Properties section end -->
+
+
+	<!-- Services section -->
+	<section class="services-section spad set-bg" data-setbg="{% static 'hose/img/service-bg.jpg' %}">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6">
+					<img src="{% static 'hose/img/service.jpg' %}"alt="">
+				</div>
+				{% if services %}
+				{% for s in services %}
+				<div class="col-lg-5 offset-lg-1 pl-lg-0">
+					<div class="section-title text-white">
+						<h3>OUR SERVICES</h3>
+						<p>We provide the perfect service for </p>
+					</div>
+					<div class="services">
+						<div class="service-item">
+							<i class="fa fa-comments"></i>
+							<div class="service-text">
+								<h5>{{s.service_title}}</h5>
+								<p>{{s.service_content}}</p>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+					{% endif%}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Services section end -->
+
+
+	<!-- feature section -->
+	<section class="feature-section spad">
+		<div class="container">
+			<div class="section-title text-center">
+				<h3>Featured Listings</h3>
+				<p>Browse houses and flats for sale and to rent in your area</p>
+			</div>
+			<div class="row">
+			{% if properties  %}
+			{% for pe in  properties%}
+				<div class="col-lg-4 col-md-6">
+					<!-- feature -->
+					<div class="feature-item">
+						<div class="feature-pic set-bg" data-setbg="{{pe.prop_pic.url}}">
+							<div class="sale-notic">{{pe.property_status}}</div>
+						</div>
+						<div class="feature-text">
+							<div class="text-center feature-title">
+								<h5>{{pe.street_name}}</h5>
+								<p><i class="fa fa-map-marker"></i> {{pe.city}}</p>
+							</div>
+							<div class="room-info-warp">
+								<div class="room-info">
+									<div class="rf-left">
+										<p><i class="fa fa-th-large"></i>{{pe.property_size|intcomma}}  Square foot</p>
+										<p><i class="fa fa-bed"></i> {{pe.bedroom}}  Bedrooms</p>
+									</div>
+									<div class="rf-right">
+										<p><i class="fa fa-car"></i> {{pe.garage}}   Garages</p>
+										<p><i class="fa fa-bath"></i>{{pe.bathroom}}  Bathrooms</p>
+									</div>	
+								</div>
+								<div class="room-info">
+									<div class="rf-left">
+										<p><i class="fa fa-user"></i> {{pe.user| capfirst}}</p>
+									</div>
+									<div class="rf-right">
+										<p><i class="fa fa-clock-o"></i> {{pe.date_posted| naturalday |naturaltime}}</p>
+									</div>	
+								</div>
+							</div>
+							<a href="#" class="room-price">${{pe.price|intcomma}}</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+			{% endif %}
+			</div>
+		</div>
+	</section>
+	<!-- feature section end -->
+	<!-- feature category section -->
+	<section class="feature-category-section spad">
+		<div class="container">
+			<div class="section-title text-center">
+				<h3>LOOKING PROPERTY</h3>
+				<p>What kind of property are you looking for? We will help you</p>
+			</div>
+			<div class="row">
+			{% if category %}
+			{% for c in category %}
+				<div class="col-lg-3 col-md-6 f-cata">
+					<img src="{{c.cat_pic.url}}" alt="">
+					<h5>{{c.cat_name}}</h5>
+				</div>
+					{% endfor %}
+					{% endif %}
+			</div>
+		</div>
+	</section>
+	<!-- feature category section end-->
+
+
+	<!-- Gallery section -->
+	<section class="gallery-section spad">
+		<div class="container">
+			<div class="section-title text-center">
+				<h3>Popular Places</h3>
+				<p>We understand the value and importance of place</p>
+			</div>
+			<div class="gallery">
+				<div class="grid-sizer"></div>
+				<a href="#" class="gallery-item grid-long set-bg" data-setbg="{% static 'hose/img/gallery/1.jpg' %}">
+					<div class="gi-info">
+						<h3>New York</h3>
+						<p>118 Properties</p>
+					</div>
+				</a>
+				<a href="#" class="gallery-item grid-wide set-bg" data-setbg="{% static 'img/gallery/2.jpg' %}">
+					<div class="gi-info">
+						<h3>Florida</h3>
+						<p>112 Properties</p>
+					</div>
+				</a>
+				<a href="#" class="gallery-item set-bg" data-setbg="{% static 'hose/img/gallery/3.jpg' %}">
+					<div class="gi-info">
+						<h3>San Jose</h3>
+						<p>72 Properties</p>
+					</div>
+				</a>
+				<a href="#" class="gallery-item set-bg" data-setbg="{% static 'hose/img/gallery/4.jpg' %}">
+					<div class="gi-info">
+						<h3>St Louis</h3>
+						<p>50 Properties</p>
+					</div>
+				</a>
+				
+			</div>
+		</div>
+	</section>
+	<!-- Gallery section end -->
+
+
+
+	<!-- Review section -->
+	<section class="review-section set-bg" data-setbg="{% static 'hose/img/review-bg.jpg' %}">
+		<div class="container">
+			<div class="review-slider owl-carousel">
+				<div class="review-item text-white">
+					<div class="rating">
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+					</div>
+					<p>“Leramiz was quick to understand my needs and steer me in the right direction. Their professionalism and warmth made the process of finding a suitable home a lot less stressful than it could have been. Thanks, agent Tony Holland.”</p>
+					<h5>Stacy Mc Neeley</h5>
+					<span>CEP’s Director</span>
+					<div class="clint-pic set-bg" data-setbg="{% static 'hose/img/review/1.jpg' %}"></div>
+				</div>
+				<div class="review-item text-white">
+					<div class="rating">
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+					</div>
+					<p>“Leramiz was quick to understand my needs and steer me in the right direction. Their professionalism and warmth made the process of finding a suitable home a lot less stressful than it could have been. Thanks, agent Tony Holland.”</p>
+					<h5>Stacy Mc Neeley</h5>
+					<span>CEP’s Director</span>
+					<div class="clint-pic set-bg" data-setbg="{% static 'hose/img/review/1.jpg' %}"></div>
+				</div>
+				<div class="review-item text-white">
+					<div class="rating">
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+					</div>
+					<p>“Leramiz was quick to understand my needs and steer me in the right direction. Their professionalism and warmth made the process of finding a suitable home a lot less stressful than it could have been. Thanks, agent Tony Holland.”</p>
+					<h5>Stacy Mc Neeley</h5>
+					<span>CEP’s Director</span>
+					<div class="clint-pic set-bg" data-setbg="{% static 'hose/img/review/1.jpg' %}"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Review section end-->
+
+
+	<!-- Blog section -->
+	{% if blogs %}
+	{% for e in blogs  %}
+	<section class="blog-section spad">
+		<div class="container">
+			<div class="section-title text-center">
+				<h3>LATEST NEWS</h3>
+				<p>Real estate news headlines around the world.</p>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-6 blog-item">
+					<img src="{{e.blog_pic.url}}" alt="">
+					<h5><a href="{% url 'hose:single-blog' e.id %}">{{e.blog_title}}</a></h5>
+					<div class="blog-meta">
+						<span><i class="fa fa-clock-o"></i>{{e.date_posted|naturaltime}}</span>
+					</div>
+					<p>{{e.blog_content}}</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Blog section end -->
+	{% endfor %}
+	{% endif %}
+{% endblock%}
